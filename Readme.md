@@ -6,7 +6,44 @@ Please see:
 https://github.com/danielguerra69/ubuntu-xrdp
 
 
-
+​
+51
+You can change your password in the rdp session in a terminal
+52
+​
+53
+```bash
+54
+passwd
+55
+```
+56
+​
+57
+## Add new users
+58
+​
+59
+No configuration is needed for new users just do
+60
+​
+61
+```bash
+62
+docker exec -ti uxrdp adduser mynewuser
+63
+```
+64
+​
+65
+After this the new user can login
+66
+​
+67
+## Add new services
+68
+​
+69
 To make sure all processes are working supervisor is installed.
 70
 The location for services to start is /etc/supervisor/conf.d
@@ -86,4 +123,3 @@ vi docker-compose.override.yml # if you want to override any default value
 docker-compose up -d
 108
 ```
-109
