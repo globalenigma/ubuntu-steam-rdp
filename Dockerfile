@@ -106,6 +106,22 @@ COPY bin /usr/bin
 COPY etc /etc
 COPY autostart /etc/xdg/autostart
 
+#Set-up and install STEAM
+
+RUN sed -i '/# deb-src http:\/\/archive.ubuntu.com\/ubuntu\/ bionic main restricted/s/^# //g' /etc/apt/sources.list
+RUN sed -i '/# deb-src http:\/\/archive.ubuntu.com\/ubuntu\/ bionic-updates main restricted/s/^# //g' /etc/apt/sources.list
+RUN sed -i '/# deb-src http:\/\/archive.ubuntu.com\/ubuntu\/ bionic universe/s/^# //g' /etc/apt/sources.list
+RUN sed -i '/# deb-src http:\/\/archive.ubuntu.com\/ubuntu\/ bionic-updates universe/s/^# //g' /etc/apt/sources.list
+RUN sed -i '/# deb-src http:\/\/archive.ubuntu.com\/ubuntu\/ bionic multiverse/s/^# //g' /etc/apt/sources.list
+RUN sed -i '/# deb-src http:\/\/archive.ubuntu.com\/ubuntu\/ bionic-updates multiverse/s/^# //g' /etc/apt/sources.list
+
+RUN dpkg --add-architecture i386
+RUN apt-get update
+RUN apt-get install -y xterm steam-installer
+RUN apt-get clean -y
+RUN apt-get auto-clean -y
+RUN apt-get autoremove -y
+
 # Configure
 RUN mkdir /var/run/dbus && \
   cp /etc/X11/xrdp/xorg.conf /etc/X11 && \
